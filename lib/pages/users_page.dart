@@ -29,6 +29,7 @@ class UsersPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 16,),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     Expanded(child: UserCard()),
                     Expanded(child: UserCard()),
