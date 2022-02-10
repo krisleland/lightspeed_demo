@@ -19,7 +19,7 @@ class UsersPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children:<Widget>[
-                const Text('Users', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                const Text('Users', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                 const Divider(
                   height: 8,
                   thickness: 1,
