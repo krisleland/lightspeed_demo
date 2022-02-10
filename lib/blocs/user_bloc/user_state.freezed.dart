@@ -19,18 +19,24 @@ class _$UserStateTearOff {
   const _$UserStateTearOff();
 
   UserStateLoaded call(
-      {required Map<int, User> users, required Set<int> expandedIds}) {
+      {required Map<int, User> users,
+      required Set<int> expandedIds,
+      required Map<int, List<Todo>> todos}) {
     return UserStateLoaded(
       users: users,
       expandedIds: expandedIds,
+      todos: todos,
     );
   }
 
   UserStateLoading loading(
-      {required Map<int, User> users, required Set<int> expandedIds}) {
+      {required Map<int, User> users,
+      required Set<int> expandedIds,
+      required Map<int, List<Todo>> todos}) {
     return UserStateLoading(
       users: users,
       expandedIds: expandedIds,
+      todos: todos,
     );
   }
 }
@@ -42,24 +48,36 @@ const $UserState = _$UserStateTearOff();
 mixin _$UserState {
   Map<int, User> get users => throw _privateConstructorUsedError;
   Set<int> get expandedIds => throw _privateConstructorUsedError;
+  Map<int, List<Todo>> get todos => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(Map<int, User> users, Set<int> expandedIds) $default, {
-    required TResult Function(Map<int, User> users, Set<int> expandedIds)
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)
+        $default, {
+    required TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)
         loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(Map<int, User> users, Set<int> expandedIds)? $default, {
-    TResult Function(Map<int, User> users, Set<int> expandedIds)? loading,
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)?
+        $default, {
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)?
+        loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(Map<int, User> users, Set<int> expandedIds)? $default, {
-    TResult Function(Map<int, User> users, Set<int> expandedIds)? loading,
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)?
+        $default, {
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)?
+        loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -92,7 +110,8 @@ mixin _$UserState {
 abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res>;
-  $Res call({Map<int, User> users, Set<int> expandedIds});
+  $Res call(
+      {Map<int, User> users, Set<int> expandedIds, Map<int, List<Todo>> todos});
 }
 
 /// @nodoc
@@ -107,6 +126,7 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
   $Res call({
     Object? users = freezed,
     Object? expandedIds = freezed,
+    Object? todos = freezed,
   }) {
     return _then(_value.copyWith(
       users: users == freezed
@@ -117,6 +137,10 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
           ? _value.expandedIds
           : expandedIds // ignore: cast_nullable_to_non_nullable
               as Set<int>,
+      todos: todos == freezed
+          ? _value.todos
+          : todos // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Todo>>,
     ));
   }
 }
@@ -128,7 +152,8 @@ abstract class $UserStateLoadedCopyWith<$Res>
           UserStateLoaded value, $Res Function(UserStateLoaded) then) =
       _$UserStateLoadedCopyWithImpl<$Res>;
   @override
-  $Res call({Map<int, User> users, Set<int> expandedIds});
+  $Res call(
+      {Map<int, User> users, Set<int> expandedIds, Map<int, List<Todo>> todos});
 }
 
 /// @nodoc
@@ -145,6 +170,7 @@ class _$UserStateLoadedCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
   $Res call({
     Object? users = freezed,
     Object? expandedIds = freezed,
+    Object? todos = freezed,
   }) {
     return _then(UserStateLoaded(
       users: users == freezed
@@ -155,6 +181,10 @@ class _$UserStateLoadedCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
           ? _value.expandedIds
           : expandedIds // ignore: cast_nullable_to_non_nullable
               as Set<int>,
+      todos: todos == freezed
+          ? _value.todos
+          : todos // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Todo>>,
     ));
   }
 }
@@ -162,16 +192,19 @@ class _$UserStateLoadedCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserStateLoaded implements UserStateLoaded {
-  _$UserStateLoaded({required this.users, required this.expandedIds});
+  _$UserStateLoaded(
+      {required this.users, required this.expandedIds, required this.todos});
 
   @override
   final Map<int, User> users;
   @override
   final Set<int> expandedIds;
+  @override
+  final Map<int, List<Todo>> todos;
 
   @override
   String toString() {
-    return 'UserState(users: $users, expandedIds: $expandedIds)';
+    return 'UserState(users: $users, expandedIds: $expandedIds, todos: $todos)';
   }
 
   @override
@@ -181,14 +214,16 @@ class _$UserStateLoaded implements UserStateLoaded {
             other is UserStateLoaded &&
             const DeepCollectionEquality().equals(other.users, users) &&
             const DeepCollectionEquality()
-                .equals(other.expandedIds, expandedIds));
+                .equals(other.expandedIds, expandedIds) &&
+            const DeepCollectionEquality().equals(other.todos, todos));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(users),
-      const DeepCollectionEquality().hash(expandedIds));
+      const DeepCollectionEquality().hash(expandedIds),
+      const DeepCollectionEquality().hash(todos));
 
   @JsonKey(ignore: true)
   @override
@@ -198,31 +233,42 @@ class _$UserStateLoaded implements UserStateLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(Map<int, User> users, Set<int> expandedIds) $default, {
-    required TResult Function(Map<int, User> users, Set<int> expandedIds)
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)
+        $default, {
+    required TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)
         loading,
   }) {
-    return $default(users, expandedIds);
+    return $default(users, expandedIds, todos);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(Map<int, User> users, Set<int> expandedIds)? $default, {
-    TResult Function(Map<int, User> users, Set<int> expandedIds)? loading,
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)?
+        $default, {
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)?
+        loading,
   }) {
-    return $default?.call(users, expandedIds);
+    return $default?.call(users, expandedIds, todos);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(Map<int, User> users, Set<int> expandedIds)? $default, {
-    TResult Function(Map<int, User> users, Set<int> expandedIds)? loading,
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)?
+        $default, {
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)?
+        loading,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(users, expandedIds);
+      return $default(users, expandedIds, todos);
     }
     return orElse();
   }
@@ -262,12 +308,15 @@ class _$UserStateLoaded implements UserStateLoaded {
 abstract class UserStateLoaded implements UserState {
   factory UserStateLoaded(
       {required Map<int, User> users,
-      required Set<int> expandedIds}) = _$UserStateLoaded;
+      required Set<int> expandedIds,
+      required Map<int, List<Todo>> todos}) = _$UserStateLoaded;
 
   @override
   Map<int, User> get users;
   @override
   Set<int> get expandedIds;
+  @override
+  Map<int, List<Todo>> get todos;
   @override
   @JsonKey(ignore: true)
   $UserStateLoadedCopyWith<UserStateLoaded> get copyWith =>
@@ -281,7 +330,8 @@ abstract class $UserStateLoadingCopyWith<$Res>
           UserStateLoading value, $Res Function(UserStateLoading) then) =
       _$UserStateLoadingCopyWithImpl<$Res>;
   @override
-  $Res call({Map<int, User> users, Set<int> expandedIds});
+  $Res call(
+      {Map<int, User> users, Set<int> expandedIds, Map<int, List<Todo>> todos});
 }
 
 /// @nodoc
@@ -298,6 +348,7 @@ class _$UserStateLoadingCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
   $Res call({
     Object? users = freezed,
     Object? expandedIds = freezed,
+    Object? todos = freezed,
   }) {
     return _then(UserStateLoading(
       users: users == freezed
@@ -308,6 +359,10 @@ class _$UserStateLoadingCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
           ? _value.expandedIds
           : expandedIds // ignore: cast_nullable_to_non_nullable
               as Set<int>,
+      todos: todos == freezed
+          ? _value.todos
+          : todos // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Todo>>,
     ));
   }
 }
@@ -315,16 +370,19 @@ class _$UserStateLoadingCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserStateLoading implements UserStateLoading {
-  _$UserStateLoading({required this.users, required this.expandedIds});
+  _$UserStateLoading(
+      {required this.users, required this.expandedIds, required this.todos});
 
   @override
   final Map<int, User> users;
   @override
   final Set<int> expandedIds;
+  @override
+  final Map<int, List<Todo>> todos;
 
   @override
   String toString() {
-    return 'UserState.loading(users: $users, expandedIds: $expandedIds)';
+    return 'UserState.loading(users: $users, expandedIds: $expandedIds, todos: $todos)';
   }
 
   @override
@@ -334,14 +392,16 @@ class _$UserStateLoading implements UserStateLoading {
             other is UserStateLoading &&
             const DeepCollectionEquality().equals(other.users, users) &&
             const DeepCollectionEquality()
-                .equals(other.expandedIds, expandedIds));
+                .equals(other.expandedIds, expandedIds) &&
+            const DeepCollectionEquality().equals(other.todos, todos));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(users),
-      const DeepCollectionEquality().hash(expandedIds));
+      const DeepCollectionEquality().hash(expandedIds),
+      const DeepCollectionEquality().hash(todos));
 
   @JsonKey(ignore: true)
   @override
@@ -351,31 +411,42 @@ class _$UserStateLoading implements UserStateLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(Map<int, User> users, Set<int> expandedIds) $default, {
-    required TResult Function(Map<int, User> users, Set<int> expandedIds)
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)
+        $default, {
+    required TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)
         loading,
   }) {
-    return loading(users, expandedIds);
+    return loading(users, expandedIds, todos);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(Map<int, User> users, Set<int> expandedIds)? $default, {
-    TResult Function(Map<int, User> users, Set<int> expandedIds)? loading,
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)?
+        $default, {
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)?
+        loading,
   }) {
-    return loading?.call(users, expandedIds);
+    return loading?.call(users, expandedIds, todos);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(Map<int, User> users, Set<int> expandedIds)? $default, {
-    TResult Function(Map<int, User> users, Set<int> expandedIds)? loading,
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)?
+        $default, {
+    TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, List<Todo>> todos)?
+        loading,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(users, expandedIds);
+      return loading(users, expandedIds, todos);
     }
     return orElse();
   }
@@ -415,12 +486,15 @@ class _$UserStateLoading implements UserStateLoading {
 abstract class UserStateLoading implements UserState {
   factory UserStateLoading(
       {required Map<int, User> users,
-      required Set<int> expandedIds}) = _$UserStateLoading;
+      required Set<int> expandedIds,
+      required Map<int, List<Todo>> todos}) = _$UserStateLoading;
 
   @override
   Map<int, User> get users;
   @override
   Set<int> get expandedIds;
+  @override
+  Map<int, List<Todo>> get todos;
   @override
   @JsonKey(ignore: true)
   $UserStateLoadingCopyWith<UserStateLoading> get copyWith =>

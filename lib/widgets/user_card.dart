@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lightspeed_demo/pages/todos_page.dart';
 import 'package:lightspeed_demo/typicode_api/models/user.dart';
 import 'package:lightspeed_demo/widgets/styles.dart';
 
@@ -245,7 +246,14 @@ class UserCardExpansionContent extends StatelessWidget {
           height: 8,
         ),
         GestureDetector(
-          onTap: () => null,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => TodosPage(user: user,)
+              )
+            );
+          },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
