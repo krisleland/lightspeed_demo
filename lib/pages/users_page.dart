@@ -12,21 +12,31 @@ class UsersPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
-            Text('Users', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            Divider(
-              height: 8,
-              thickness: 1,
-              indent: 0,
-              endIndent: 0,
-              color: Colors.grey,
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 700),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:<Widget>[
+                const Text('Users', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                const Divider(
+                  height: 8,
+                  thickness: 1,
+                  indent: 0,
+                  endIndent: 0,
+                  color: Colors.grey,
+                ),
+                const SizedBox(height: 16,),
+                Row(
+                  children: const [
+                    Expanded(child: UserCard()),
+                    Expanded(child: UserCard()),
+                  ],
+                )
+              ],
             ),
-            SizedBox(height: 16,),
-            UserCard()
-          ],
+          ),
         ),
       ),
     );
