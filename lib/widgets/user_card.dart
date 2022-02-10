@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lightspeed_demo/typicode_api/models/user.dart';
 import 'package:lightspeed_demo/widgets/styles.dart';
 
 class UserCard extends StatefulWidget {
-  const UserCard({Key? key}) : super(key: key);
+  final User user;
+  const UserCard({Key? key, required this.user}) : super(key: key);
 
   @override
   State<UserCard> createState() => _UserCardState();
@@ -32,9 +34,9 @@ class _UserCardState extends State<UserCard> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        '{name}',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Text(
+                        widget.user.name ?? '{name}',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
                         height: 12,
@@ -47,7 +49,7 @@ class _UserCardState extends State<UserCard> {
                             size: 14,
                           ),
                           Text(
-                            '{phone}',
+                            widget.user.phone ?? '{phone}',
                             style: content,
                           ),
                           const SizedBox(
@@ -58,9 +60,14 @@ class _UserCardState extends State<UserCard> {
                             color: Colors.blue,
                             size: 14,
                           ),
-                          Text(
-                            'email',
-                            style: content,
+                          SizedBox(
+                            width: 120,
+                            child: Flexible(
+                              child: Text(
+                                widget.user.email ?? '{email}',
+                                style: content,
+                              ),
+                            ),
                           )
                         ],
                       )
@@ -84,8 +91,8 @@ class _UserCardState extends State<UserCard> {
             ),
             UserCardExpansion(
               expand: expanded,
-              child: const SizedBox(
-                  width: double.infinity, child: UserCardExpansionContent()),
+              child: SizedBox(
+                  width: double.infinity, child: UserCardExpansionContent(user: widget.user,)),
             )
           ],
         ),
@@ -156,7 +163,8 @@ class _UserCardExpansionState extends State<UserCardExpansion>
 }
 
 class UserCardExpansionContent extends StatelessWidget {
-  const UserCardExpansionContent({Key? key}) : super(key: key);
+  final User user;
+  const UserCardExpansionContent({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -178,11 +186,11 @@ class UserCardExpansionContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '{street}',
+                    user.address?.street ?? '{street}',
                     style: content,
                   ),
                   Text(
-                    '{city}, {zipcode}',
+                    '${user.address?.city ?? '{city}'}, ${user.address?.zipcode ?? '{zipcode}'}',
                     style: content,
                   ),
                 ],

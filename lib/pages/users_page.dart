@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lightspeed_demo/blocs/user_bloc/user_cubit.dart';
+import 'package:lightspeed_demo/blocs/user_bloc/user_state.dart';
 import 'package:lightspeed_demo/widgets/user_card.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UsersPage extends StatelessWidget {
   const UsersPage({Key? key}) : super(key: key);
@@ -34,14 +37,24 @@ class UsersPage extends StatelessWidget {
                   height: 16,
                 ),
                 Expanded(
-                  child: MasonryGridView.count(
-                    addAutomaticKeepAlives: true,
-                   crossAxisCount: 2,
-                    mainAxisSpacing: 4,
-                    crossAxisSpacing: 4,
-                    itemBuilder: (context, index) {
-                     return UserCard(key: Key('user_card_$index'));
-                    },
+                  child: BlocBuilder<UserCubit, UserState>(
+                    builder: (context, state) {
+                      if (state is UserStateLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else {
+                        return MasonryGridView.count(
+                          addAutomaticKeepAlives: false,
+                          crossAxisCount: 2,
+                          itemCount: state.users.length,
+                          mainAxisSpacing: 4,
+                          crossAxisSpacing: 4,
+                          itemBuilder: (context, index) {
+                            return UserCard(
+                                user: state.users.values.elementAt(index), key: Key('user_card_$index'));
+                          },
+                        );
+                      }
+                    }
                   )
                   // child: GridView.count(
                   //   childAspectRatio: 4/1,

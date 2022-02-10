@@ -1,0 +1,1 @@
+const String typicodeApiUsers = 'https://jsonplaceholder.typicode.com/users';
