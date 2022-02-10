@@ -11,9 +11,6 @@ class UsersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Users'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
@@ -37,23 +34,27 @@ class UsersPage extends StatelessWidget {
                   height: 16,
                 ),
                 Expanded(
-                  child: BlocBuilder<UserCubit, UserState>(
-                    builder: (context, state) {
-                      if (state is UserStateLoading) {
-                        return const Center(child: CircularProgressIndicator());
-                      } else {
-                        return MasonryGridView.count(
-                          addAutomaticKeepAlives: false,
-                          crossAxisCount: 2,
-                          itemCount: state.users.length,
-                          mainAxisSpacing: 4,
-                          crossAxisSpacing: 4,
-                          itemBuilder: (context, index) {
-                            return UserCard(
-                                user: state.users.values.elementAt(index), key: Key('user_card_$index'));
-                          },
-                        );
-                      }
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return BlocBuilder<UserCubit, UserState>(
+                        builder: (context, state) {
+                          if (state is UserStateLoading) {
+                            return const Center(child: CircularProgressIndicator());
+                          } else {
+                            return MasonryGridView.count(
+                              addAutomaticKeepAlives: false,
+                              crossAxisCount: constraints.maxWidth < 600 ? 1 : 2,
+                              itemCount: state.users.length,
+                              mainAxisSpacing: 4,
+                              crossAxisSpacing: 4,
+                              itemBuilder: (context, index) {
+                                return UserCard(
+                                    user: state.users.values.elementAt(index), key: Key('user_card_$index'));
+                              },
+                            );
+                          }
+                        }
+                      );
                     }
                   )
                   // child: GridView.count(

@@ -4,6 +4,7 @@ import 'package:lightspeed_demo/widgets/styles.dart';
 
 class UserCard extends StatefulWidget {
   final User user;
+
   const UserCard({Key? key, required this.user}) : super(key: key);
 
   @override
@@ -21,12 +22,12 @@ class _UserCardState extends State<UserCard> {
           borderRadius: BorderRadius.circular(4)),
       elevation: 0,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,34 +53,32 @@ class _UserCardState extends State<UserCard> {
                             widget.user.phone ?? '{phone}',
                             style: content,
                           ),
-                          const SizedBox(
-                            width: 16,
-                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
                           const Icon(
                             Icons.email,
                             color: Colors.blue,
                             size: 14,
                           ),
-                          SizedBox(
-                            width: 120,
-                            child: Flexible(
-                              child: Text(
-                                widget.user.email ?? '{email}',
-                                style: content,
-                              ),
-                            ),
+                          Text(
+                            widget.user.email ?? '{email}',
+                            style: content,
                           )
                         ],
                       )
                     ],
                   ),
-                  const Expanded(child: SizedBox(),),
+                  const Expanded(
+                    child: SizedBox(),
+                  ),
                   Padding(
                       padding: const EdgeInsets.only(top: 6),
                       child: GestureDetector(
                           onTap: () => setState(() {
-                            expanded = !expanded;
-                          }),
+                                expanded = !expanded;
+                              }),
                           child: Icon(
                             expanded
                                 ? Icons.keyboard_arrow_down
@@ -92,7 +91,10 @@ class _UserCardState extends State<UserCard> {
             UserCardExpansion(
               expand: expanded,
               child: SizedBox(
-                  width: double.infinity, child: UserCardExpansionContent(user: widget.user,)),
+                  width: double.infinity,
+                  child: UserCardExpansionContent(
+                    user: widget.user,
+                  )),
             )
           ],
         ),
@@ -164,7 +166,9 @@ class _UserCardExpansionState extends State<UserCardExpansion>
 
 class UserCardExpansionContent extends StatelessWidget {
   final User user;
-  const UserCardExpansionContent({Key? key, required this.user}) : super(key: key);
+
+  const UserCardExpansionContent({Key? key, required this.user})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +216,7 @@ class UserCardExpansionContent extends StatelessWidget {
           height: 12,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
             children: [
               Text(
