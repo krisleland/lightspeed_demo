@@ -20,76 +20,74 @@ class _UserCardState extends State<UserCard> {
       elevation: 0,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12),
-        child: Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          '{name}',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.phone,
-                              color: Colors.blue,
-                              size: 14,
-                            ),
-                            Text(
-                              '{phone}',
-                              style: content,
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            const Icon(
-                              Icons.email,
-                              color: Colors.blue,
-                              size: 14,
-                            ),
-                            Text(
-                              'email',
-                              style: content,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    const Expanded(child: SizedBox(),),
-                    Padding(
-                        padding: const EdgeInsets.only(top: 6),
-                        child: GestureDetector(
-                            onTap: () => setState(() {
-                              expanded = !expanded;
-                            }),
-                            child: Icon(
-                              expanded
-                                  ? Icons.keyboard_arrow_down
-                                  : Icons.keyboard_arrow_right,
-                              size: 20,
-                            )))
-                  ],
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        '{name}',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.phone,
+                            color: Colors.blue,
+                            size: 14,
+                          ),
+                          Text(
+                            '{phone}',
+                            style: content,
+                          ),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          const Icon(
+                            Icons.email,
+                            color: Colors.blue,
+                            size: 14,
+                          ),
+                          Text(
+                            'email',
+                            style: content,
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  const Expanded(child: SizedBox(),),
+                  Padding(
+                      padding: const EdgeInsets.only(top: 6),
+                      child: GestureDetector(
+                          onTap: () => setState(() {
+                            expanded = !expanded;
+                          }),
+                          child: Icon(
+                            expanded
+                                ? Icons.keyboard_arrow_down
+                                : Icons.keyboard_arrow_right,
+                            size: 20,
+                          )))
+                ],
               ),
-              UserCardExpansion(
-                expand: expanded,
-                child: const SizedBox(
-                    width: double.infinity, child: UserCardExpansionContent()),
-              )
-            ],
-          ),
+            ),
+            UserCardExpansion(
+              expand: expanded,
+              child: const SizedBox(
+                  width: double.infinity, child: UserCardExpansionContent()),
+            )
+          ],
         ),
       ),
     );
