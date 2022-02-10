@@ -41,9 +41,9 @@ class UsersPage extends StatelessWidget {
                           if (state is UserStateLoading) {
                             return const Center(child: CircularProgressIndicator());
                           } else {
-                            return MasonryGridView.count(
+                            return AlignedGridView.count(
                               addAutomaticKeepAlives: false,
-                              crossAxisCount: constraints.maxWidth < 600 ? 1 : 2,
+                              crossAxisCount: constraints.maxWidth < 450 ? 1 : 2,
                               itemCount: state.users.length,
                               mainAxisSpacing: 4,
                               crossAxisSpacing: 4,
