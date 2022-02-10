@@ -11,8 +11,11 @@ class UsersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Lightspeed Demo'),
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 700),
@@ -43,10 +46,10 @@ class UsersPage extends StatelessWidget {
                           } else {
                             return AlignedGridView.count(
                               addAutomaticKeepAlives: false,
-                              crossAxisCount: constraints.maxWidth < 450 ? 1 : 2,
+                              crossAxisCount: constraints.maxWidth < 380 ? 1 : 2,
                               itemCount: state.users.length,
-                              mainAxisSpacing: 4,
-                              crossAxisSpacing: 4,
+                              mainAxisSpacing: 2,
+                              crossAxisSpacing: 2,
                               itemBuilder: (context, index) {
                                 return UserCard(
                                     user: state.users.values.elementAt(index), key: Key('user_card_$index'));

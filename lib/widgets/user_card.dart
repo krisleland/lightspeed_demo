@@ -23,83 +23,108 @@ class _UserCardState extends State<UserCard> {
               side: const BorderSide(color: Colors.grey, width: 1),
               borderRadius: BorderRadius.circular(4)),
           elevation: expanded ? 8 : 0,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            widget.user.name ?? '{name}',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Icon(
-                                Icons.phone,
-                                color: Colors.blue,
-                                size: 14,
-                              ),
                               Text(
-                                widget.user.phone ?? '{phone}',
-                                style: content,
+                                widget.user.name ?? '{name}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.email,
-                                color: Colors.blue,
-                                size: 14,
+                              const SizedBox(
+                                height: 12,
                               ),
-                              Text(
-                                widget.user.email ?? '{email}',
-                                style: content,
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.phone,
+                                    color: Colors.blue,
+                                    size: 14,
+                                  ),
+                                  Text(
+                                    widget.user.phone ?? '{phone}',
+                                    style: content,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.email,
+                                    color: Colors.blue,
+                                    size: 14,
+                                  ),
+                                  Text(
+                                    widget.user.email ?? '{email}',
+                                    style: content,
+                                  )
+                                ],
                               )
                             ],
-                          )
+                          ),
+                          const Expanded(
+                            child: SizedBox(),
+                          ),
+                          // Padding(
+                          //     padding: const EdgeInsets.only(top: 6),
+                          //     child: GestureDetector(
+                          //         onTap: () => setState(() {
+                          //               expanded = !expanded;
+                          //             }),
+                          //         child: Icon(
+                          //           expanded
+                          //               ? Icons.keyboard_arrow_down
+                          //               : Icons.keyboard_arrow_right,
+                          //           size: 20,
+                          //         )))
                         ],
                       ),
-                      const Expanded(
-                        child: SizedBox(),
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.only(top: 6),
-                          child: GestureDetector(
-                              onTap: () => setState(() {
-                                    expanded = !expanded;
-                                  }),
-                              child: Icon(
-                                expanded
-                                    ? Icons.keyboard_arrow_down
-                                    : Icons.keyboard_arrow_right,
-                                size: 20,
-                              )))
-                    ],
+                    ),
+                    UserCardExpansion(
+                      expand: expanded,
+                      child: SizedBox(
+                          width: double.infinity,
+                          child: UserCardExpansionContent(
+                            user: widget.user,
+                          )),
+                    )
+                  ],
+                ),
+              ),
+              Positioned.fill(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                        padding: const EdgeInsets.only(top: 6),
+                        child: GestureDetector(
+                            onTap: () => setState(() {
+                                  expanded = !expanded;
+                                }),
+                            child: Icon(
+                              expanded
+                                  ? Icons.keyboard_arrow_down
+                                  : Icons.keyboard_arrow_right,
+                              size: 20,
+                            ))),
                   ),
                 ),
-                UserCardExpansion(
-                  expand: expanded,
-                  child: SizedBox(
-                      width: double.infinity,
-                      child: UserCardExpansionContent(
-                        user: widget.user,
-                      )),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ],
@@ -180,7 +205,7 @@ class UserCardExpansionContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -217,7 +242,7 @@ class UserCardExpansionContent extends StatelessWidget {
           color: Colors.grey,
         ),
         const SizedBox(
-          height: 12,
+          height: 8,
         ),
         GestureDetector(
           onTap: () => null,
