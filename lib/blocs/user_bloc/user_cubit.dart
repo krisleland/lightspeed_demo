@@ -13,7 +13,7 @@ class UserCubit extends Cubit<UserState> {
   _getUserData() async {
     var users = await handler.users();
     if (users.isNotEmpty) {
-      emit(state.copyWith(users: users));
+      emit(UserState.loaded(users: users, expandedIds: {}, todos: {}));
     }
   }
 
@@ -23,8 +23,21 @@ class UserCubit extends Cubit<UserState> {
     }
     emit(UserState.loading(users: state.users, expandedIds: state.expandedIds, todos: state.todos));
     var todos = await handler.todos(id: id);
-    Map<int, List<Todo>> newTodos = Map.from(state.todos);
+    Map<int, Map<int, Todo>> newTodos = Map.from(state.todos);
     newTodos[id] = todos;
-    emit(state.copyWith(todos: newTodos));
+    emit(UserState.loaded(users: state.users, expandedIds: state.expandedIds, todos: newTodos));
+  }
+
+  updateTodoCompletion({required Todo todo, required bool completed}) async {
+    if (!state.users.containsKey(todo.id)) {
+      return;
+    }
+    bool success = await handler.updateTodo(completed: completed, todoId: todo.id!);
+    if (success) {
+      var newTodos = Map<int, List<Todo>>.from(state.todos);
+      var newTodo = Todo(userId: todo.userId, completed: !todo.completed!, title: todo.title);
+      // var index = newTodos[newTodo.userId!].indexOf(todo)
+      // emit(state.copyWith(todos: Map.from(state.)))
+    }
   }
 }

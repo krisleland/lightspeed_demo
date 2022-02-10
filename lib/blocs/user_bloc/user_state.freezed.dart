@@ -18,10 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$UserStateTearOff {
   const _$UserStateTearOff();
 
-  UserStateLoaded call(
+  UserStateLoaded loaded(
       {required Map<int, User> users,
       required Set<int> expandedIds,
-      required Map<int, List<Todo>> todos}) {
+      required Map<int, Map<int, Todo>> todos}) {
     return UserStateLoaded(
       users: users,
       expandedIds: expandedIds,
@@ -32,7 +32,7 @@ class _$UserStateTearOff {
   UserStateLoading loading(
       {required Map<int, User> users,
       required Set<int> expandedIds,
-      required Map<int, List<Todo>> todos}) {
+      required Map<int, Map<int, Todo>> todos}) {
     return UserStateLoading(
       users: users,
       expandedIds: expandedIds,
@@ -48,54 +48,54 @@ const $UserState = _$UserStateTearOff();
 mixin _$UserState {
   Map<int, User> get users => throw _privateConstructorUsedError;
   Set<int> get expandedIds => throw _privateConstructorUsedError;
-  Map<int, List<Todo>> get todos => throw _privateConstructorUsedError;
+  Map<int, Map<int, Todo>> get todos => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)
-        $default, {
+  TResult when<TResult extends Object?>({
     required TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)
+            Map<int, Map<int, Todo>> todos)
+        loaded,
+    required TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, Map<int, Todo>> todos)
         loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
+  TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)?
-        $default, {
+            Map<int, Map<int, Todo>> todos)?
+        loaded,
     TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)?
+            Map<int, Map<int, Todo>> todos)?
         loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
+  TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)?
-        $default, {
+            Map<int, Map<int, Todo>> todos)?
+        loaded,
     TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)?
+            Map<int, Map<int, Todo>> todos)?
         loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(UserStateLoaded value) $default, {
+  TResult map<TResult extends Object?>({
+    required TResult Function(UserStateLoaded value) loaded,
     required TResult Function(UserStateLoading value) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(UserStateLoaded value)? $default, {
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(UserStateLoaded value)? loaded,
     TResult Function(UserStateLoading value)? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(UserStateLoaded value)? $default, {
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UserStateLoaded value)? loaded,
     TResult Function(UserStateLoading value)? loading,
     required TResult orElse(),
   }) =>
@@ -111,7 +111,9 @@ abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res>;
   $Res call(
-      {Map<int, User> users, Set<int> expandedIds, Map<int, List<Todo>> todos});
+      {Map<int, User> users,
+      Set<int> expandedIds,
+      Map<int, Map<int, Todo>> todos});
 }
 
 /// @nodoc
@@ -140,7 +142,7 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
       todos: todos == freezed
           ? _value.todos
           : todos // ignore: cast_nullable_to_non_nullable
-              as Map<int, List<Todo>>,
+              as Map<int, Map<int, Todo>>,
     ));
   }
 }
@@ -153,7 +155,9 @@ abstract class $UserStateLoadedCopyWith<$Res>
       _$UserStateLoadedCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Map<int, User> users, Set<int> expandedIds, Map<int, List<Todo>> todos});
+      {Map<int, User> users,
+      Set<int> expandedIds,
+      Map<int, Map<int, Todo>> todos});
 }
 
 /// @nodoc
@@ -184,7 +188,7 @@ class _$UserStateLoadedCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
       todos: todos == freezed
           ? _value.todos
           : todos // ignore: cast_nullable_to_non_nullable
-              as Map<int, List<Todo>>,
+              as Map<int, Map<int, Todo>>,
     ));
   }
 }
@@ -200,11 +204,11 @@ class _$UserStateLoaded implements UserStateLoaded {
   @override
   final Set<int> expandedIds;
   @override
-  final Map<int, List<Todo>> todos;
+  final Map<int, Map<int, Todo>> todos;
 
   @override
   String toString() {
-    return 'UserState(users: $users, expandedIds: $expandedIds, todos: $todos)';
+    return 'UserState.loaded(users: $users, expandedIds: $expandedIds, todos: $todos)';
   }
 
   @override
@@ -232,74 +236,74 @@ class _$UserStateLoaded implements UserStateLoaded {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)
-        $default, {
+  TResult when<TResult extends Object?>({
     required TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)
+            Map<int, Map<int, Todo>> todos)
+        loaded,
+    required TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, Map<int, Todo>> todos)
         loading,
   }) {
-    return $default(users, expandedIds, todos);
+    return loaded(users, expandedIds, todos);
   }
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
+  TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)?
-        $default, {
+            Map<int, Map<int, Todo>> todos)?
+        loaded,
     TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)?
+            Map<int, Map<int, Todo>> todos)?
         loading,
   }) {
-    return $default?.call(users, expandedIds, todos);
+    return loaded?.call(users, expandedIds, todos);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
+  TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)?
-        $default, {
+            Map<int, Map<int, Todo>> todos)?
+        loaded,
     TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)?
+            Map<int, Map<int, Todo>> todos)?
         loading,
     required TResult orElse(),
   }) {
-    if ($default != null) {
-      return $default(users, expandedIds, todos);
+    if (loaded != null) {
+      return loaded(users, expandedIds, todos);
     }
     return orElse();
   }
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(UserStateLoaded value) $default, {
+  TResult map<TResult extends Object?>({
+    required TResult Function(UserStateLoaded value) loaded,
     required TResult Function(UserStateLoading value) loading,
   }) {
-    return $default(this);
+    return loaded(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(UserStateLoaded value)? $default, {
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(UserStateLoaded value)? loaded,
     TResult Function(UserStateLoading value)? loading,
   }) {
-    return $default?.call(this);
+    return loaded?.call(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(UserStateLoaded value)? $default, {
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UserStateLoaded value)? loaded,
     TResult Function(UserStateLoading value)? loading,
     required TResult orElse(),
   }) {
-    if ($default != null) {
-      return $default(this);
+    if (loaded != null) {
+      return loaded(this);
     }
     return orElse();
   }
@@ -309,14 +313,14 @@ abstract class UserStateLoaded implements UserState {
   factory UserStateLoaded(
       {required Map<int, User> users,
       required Set<int> expandedIds,
-      required Map<int, List<Todo>> todos}) = _$UserStateLoaded;
+      required Map<int, Map<int, Todo>> todos}) = _$UserStateLoaded;
 
   @override
   Map<int, User> get users;
   @override
   Set<int> get expandedIds;
   @override
-  Map<int, List<Todo>> get todos;
+  Map<int, Map<int, Todo>> get todos;
   @override
   @JsonKey(ignore: true)
   $UserStateLoadedCopyWith<UserStateLoaded> get copyWith =>
@@ -331,7 +335,9 @@ abstract class $UserStateLoadingCopyWith<$Res>
       _$UserStateLoadingCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Map<int, User> users, Set<int> expandedIds, Map<int, List<Todo>> todos});
+      {Map<int, User> users,
+      Set<int> expandedIds,
+      Map<int, Map<int, Todo>> todos});
 }
 
 /// @nodoc
@@ -362,7 +368,7 @@ class _$UserStateLoadingCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
       todos: todos == freezed
           ? _value.todos
           : todos // ignore: cast_nullable_to_non_nullable
-              as Map<int, List<Todo>>,
+              as Map<int, Map<int, Todo>>,
     ));
   }
 }
@@ -378,7 +384,7 @@ class _$UserStateLoading implements UserStateLoading {
   @override
   final Set<int> expandedIds;
   @override
-  final Map<int, List<Todo>> todos;
+  final Map<int, Map<int, Todo>> todos;
 
   @override
   String toString() {
@@ -410,12 +416,12 @@ class _$UserStateLoading implements UserStateLoading {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)
-        $default, {
+  TResult when<TResult extends Object?>({
     required TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)
+            Map<int, Map<int, Todo>> todos)
+        loaded,
+    required TResult Function(Map<int, User> users, Set<int> expandedIds,
+            Map<int, Map<int, Todo>> todos)
         loading,
   }) {
     return loading(users, expandedIds, todos);
@@ -423,12 +429,12 @@ class _$UserStateLoading implements UserStateLoading {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
+  TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)?
-        $default, {
+            Map<int, Map<int, Todo>> todos)?
+        loaded,
     TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)?
+            Map<int, Map<int, Todo>> todos)?
         loading,
   }) {
     return loading?.call(users, expandedIds, todos);
@@ -436,12 +442,12 @@ class _$UserStateLoading implements UserStateLoading {
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
+  TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)?
-        $default, {
+            Map<int, Map<int, Todo>> todos)?
+        loaded,
     TResult Function(Map<int, User> users, Set<int> expandedIds,
-            Map<int, List<Todo>> todos)?
+            Map<int, Map<int, Todo>> todos)?
         loading,
     required TResult orElse(),
   }) {
@@ -453,8 +459,8 @@ class _$UserStateLoading implements UserStateLoading {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(UserStateLoaded value) $default, {
+  TResult map<TResult extends Object?>({
+    required TResult Function(UserStateLoaded value) loaded,
     required TResult Function(UserStateLoading value) loading,
   }) {
     return loading(this);
@@ -462,8 +468,8 @@ class _$UserStateLoading implements UserStateLoading {
 
   @override
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(UserStateLoaded value)? $default, {
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(UserStateLoaded value)? loaded,
     TResult Function(UserStateLoading value)? loading,
   }) {
     return loading?.call(this);
@@ -471,8 +477,8 @@ class _$UserStateLoading implements UserStateLoading {
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(UserStateLoaded value)? $default, {
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UserStateLoaded value)? loaded,
     TResult Function(UserStateLoading value)? loading,
     required TResult orElse(),
   }) {
@@ -487,14 +493,14 @@ abstract class UserStateLoading implements UserState {
   factory UserStateLoading(
       {required Map<int, User> users,
       required Set<int> expandedIds,
-      required Map<int, List<Todo>> todos}) = _$UserStateLoading;
+      required Map<int, Map<int, Todo>> todos}) = _$UserStateLoading;
 
   @override
   Map<int, User> get users;
   @override
   Set<int> get expandedIds;
   @override
-  Map<int, List<Todo>> get todos;
+  Map<int, Map<int, Todo>> get todos;
   @override
   @JsonKey(ignore: true)
   $UserStateLoadingCopyWith<UserStateLoading> get copyWith =>

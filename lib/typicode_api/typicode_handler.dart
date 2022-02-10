@@ -14,7 +14,8 @@ class TypicodeApiHandler {
 
   factory TypicodeApiHandler() {
     if (!getIt.isRegistered<TypicodeApiHandler>()) {
-      getIt.registerSingleton<TypicodeApiHandler>(TypicodeApiHandler._internal());
+      getIt.registerSingleton<TypicodeApiHandler>(
+          TypicodeApiHandler._internal());
     }
     return getIt<TypicodeApiHandler>();
   }
@@ -22,6 +23,7 @@ class TypicodeApiHandler {
   Future<Map<int, User>> users() async {
     Map<int, User> users = {};
     http.Response resp = await http.get(Uri.parse(typicodeApiUsers));
+    print(resp.statusCode);
     if (resp.statusCode == 200) {
       var data = jsonDecode(resp.body);
       for (int i = 0; i < data.length; i++) {
@@ -32,16 +34,30 @@ class TypicodeApiHandler {
     return users;
   }
 
-  Future<List<Todo>> todos({required int id}) async {
-    List<Todo> todos = [];
-    http.Response resp = await http.get(Uri.parse(typicodeApiUsers + id.toString()));
+  Future<Map<int, Todo>> todos({required int id}) async {
+    Map<int, Todo> todos = {};
+    http.Response resp =
+        await http.get(Uri.parse(todosByUserId + id.toString()));
     if (resp.statusCode == 200) {
       var data = jsonDecode(resp.body);
       for (int i = 0; i < data.length; i++) {
         var todo = Todo.fromJson(data[i]);
-        todos.add(todo);
+        todos[todo.id!] = todo;
       }
     }
     return todos;
+  }
+
+  Future<bool> updateTodo(
+      {required bool completed, required int todoId}) async {
+    await http.patch(Uri.parse(patchTodo + todoId.toString()),
+        body: {'completed': completed}).then((response) {
+          if (response.statusCode == 200) {
+            return true;
+          } else {
+            return false;
+          }
+    });
+    return false;
   }
 }

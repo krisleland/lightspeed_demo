@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lightspeed_demo/blocs/user_bloc/user_cubit.dart';
 import 'package:lightspeed_demo/pages/todos_page.dart';
 import 'package:lightspeed_demo/typicode_api/models/user.dart';
 import 'package:lightspeed_demo/widgets/styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserCard extends StatefulWidget {
   final User user;
@@ -247,6 +249,7 @@ class UserCardExpansionContent extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
+            context.read<UserCubit>().getUserTodos(id: user.id!);
             Navigator.push(
               context,
               MaterialPageRoute(

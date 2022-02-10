@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lightspeed_demo/blocs/user_bloc/user_cubit.dart';
 import 'package:lightspeed_demo/blocs/user_bloc/user_state.dart';
 import 'package:lightspeed_demo/typicode_api/models/user.dart';
+import 'package:lightspeed_demo/widgets/todo_card.dart';
 import 'package:lightspeed_demo/widgets/user_card.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,9 +56,14 @@ class TodosPage extends StatelessWidget {
                                       border: Border.all(color: Colors.grey),
                                       borderRadius: BorderRadius.circular(4),
                                     ),
-                                    child: ListView.builder(itemBuilder: (context, index) {
-                                      return Container();
-                                    }),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: ListView.builder(
+                                          itemCount: state.todos[user.id!]!.length,
+                                          itemBuilder: (context, index) {
+                                        return TodoCard(todo: state.todos[user.id]!.values.elementAt(index));
+                                      }),
+                                    ),
                                   );
                                 }
                               }
