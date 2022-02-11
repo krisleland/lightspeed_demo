@@ -23,8 +23,14 @@ class TodoCard extends StatelessWidget {
                       .updateTodoCompletion(
                           todo: todo, completed: value ?? false),
                 ),
-                Flexible(child: Text(todo.title!)),
-                SizedBox(
+                Flexible(
+                    child: Text(
+                  todo.title!,
+                  style: TextStyle(
+                      decoration:
+                          todo.completed! ? TextDecoration.lineThrough : null),
+                )),
+                const SizedBox(
                   width: 40,
                 )
               ],
@@ -33,7 +39,7 @@ class TodoCard extends StatelessWidget {
               child: Align(
                   alignment: Alignment.centerRight,
                   child: IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     onPressed: () {
                       context.read<UserCubit>().deleteTodo(todo: todo);
                     },

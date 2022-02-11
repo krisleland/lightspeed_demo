@@ -3,8 +3,6 @@ import 'package:lightspeed_demo/blocs/user_bloc/user_cubit.dart';
 import 'package:lightspeed_demo/blocs/user_bloc/user_state.dart';
 import 'package:lightspeed_demo/typicode_api/models/user.dart';
 import 'package:lightspeed_demo/widgets/todo_card.dart';
-import 'package:lightspeed_demo/widgets/user_card.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TodosPage extends StatelessWidget {

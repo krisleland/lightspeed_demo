@@ -23,7 +23,6 @@ class TypicodeApiHandler {
   Future<Map<int, User>> users() async {
     Map<int, User> users = {};
     http.Response resp = await http.get(Uri.parse(typicodeApiUsers));
-    print(resp.statusCode);
     if (resp.statusCode == 200) {
       var data = jsonDecode(resp.body);
       for (int i = 0; i < data.length; i++) {
