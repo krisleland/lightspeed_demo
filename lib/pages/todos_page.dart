@@ -48,7 +48,7 @@ class TodosPage extends StatelessWidget {
                         builder: (context, constraints) {
                           return BlocBuilder<UserCubit, UserState>(
                               builder: (context, state) {
-                                if (state is UserStateLoading) {
+                                if (state is UserStateLoading && !state.todos.containsKey(user.id)) {
                                   return const Center(child: CircularProgressIndicator());
                                 } else {
                                   return Container(
@@ -58,11 +58,11 @@ class TodosPage extends StatelessWidget {
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: ListView.builder(
-                                          itemCount: state.todos[user.id!]!.length,
-                                          itemBuilder: (context, index) {
-                                        return TodoCard(todo: state.todos[user.id]!.values.elementAt(index));
-                                      }),
+                                      child: ListView(
+                                        children: [
+                                          for (final todo in state.todos[user.id]!.values)
+                                            TodoCard(todo: todo)
+                                        ],),
                                     ),
                                   );
                                 }

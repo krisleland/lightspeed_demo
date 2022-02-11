@@ -244,34 +244,39 @@ class UserCardExpansionContent extends StatelessWidget {
           endIndent: 0,
           color: Colors.grey,
         ),
-        const SizedBox(
-          height: 8,
-        ),
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () {
             context.read<UserCubit>().getUserTodos(id: user.id!);
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => TodosPage(user: user,)
-              )
-            );
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TodosPage(
+                          user: user,
+                        )));
           },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              children: [
-                Text(
-                  'View Todos',
-                  style: content,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'View Todos',
+                      style: content,
+                    ),
+                    const Expanded(child: SizedBox()),
+                    const Icon(
+                      Icons.arrow_right_alt,
+                      size: 14,
+                    )
+                  ],
                 ),
-                const Expanded(child: SizedBox()),
-                const Icon(
-                  Icons.arrow_right_alt,
-                  size: 14,
-                )
-              ],
-            ),
+              ),
+            ],
           ),
         )
       ],

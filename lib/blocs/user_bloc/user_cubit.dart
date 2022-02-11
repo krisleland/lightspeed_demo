@@ -6,7 +6,8 @@ import 'user_state.dart';
 class UserCubit extends Cubit<UserState> {
   final TypicodeApiHandler handler = TypicodeApiHandler();
 
-  UserCubit() : super(UserState.loading(users: {}, expandedIds: {}, todos: {})) {
+  UserCubit()
+      : super(UserState.loading(users: {}, expandedIds: {}, todos: {})) {
     _getUserData();
   }
 
@@ -21,23 +22,61 @@ class UserCubit extends Cubit<UserState> {
     if (state.todos.containsKey(id) && !clearCache) {
       return;
     }
-    emit(UserState.loading(users: state.users, expandedIds: state.expandedIds, todos: state.todos));
+    emit(UserState.loading(
+        users: state.users,
+        expandedIds: state.expandedIds,
+        todos: state.todos));
     var todos = await handler.todos(id: id);
     Map<int, Map<int, Todo>> newTodos = Map.from(state.todos);
     newTodos[id] = todos;
-    emit(UserState.loaded(users: state.users, expandedIds: state.expandedIds, todos: newTodos));
+    emit(UserState.loaded(
+        users: state.users, expandedIds: state.expandedIds, todos: newTodos));
   }
 
   updateTodoCompletion({required Todo todo, required bool completed}) async {
-    if (!state.users.containsKey(todo.id)) {
+    if (!state.users.containsKey(todo.userId)) {
       return;
     }
-    bool success = await handler.updateTodo(completed: completed, todoId: todo.id!);
+    emit(UserState.loading(
+        users: state.users,
+        expandedIds: state.expandedIds,
+        todos: state.todos));
+    bool success =
+        await handler.updateTodo(completed: completed, todoId: todo.id!);
     if (success) {
-      var newTodos = Map<int, List<Todo>>.from(state.todos);
-      var newTodo = Todo(userId: todo.userId, completed: !todo.completed!, title: todo.title);
-      // var index = newTodos[newTodo.userId!].indexOf(todo)
-      // emit(state.copyWith(todos: Map.from(state.)))
+      var newTodos = Map<int, Map<int, Todo>>.from(state.todos);
+      var newTodo = Todo(
+          userId: todo.userId,
+          completed: !todo.completed!,
+          title: todo.title,
+          id: todo.id!);
+      newTodos[todo.userId]![todo.id!] = newTodo;
+      emit(UserState.loaded(
+          users: state.users, expandedIds: state.expandedIds, todos: newTodos));
+    } else {
+      emit(UserState.loaded(
+          users: state.users,
+          expandedIds: state.expandedIds,
+          todos: state.todos));
+    }
+  }
+
+  deleteTodo({required Todo todo}) async {
+    emit(UserState.loading(
+        users: state.users,
+        expandedIds: state.expandedIds,
+        todos: state.todos));
+    bool success = await handler.deleteTodo(todo: todo);
+    if (success) {
+      var newTodos = Map<int, Map<int, Todo>>.from(state.todos);
+      newTodos[todo.userId]!.remove(todo.id);
+      emit(UserState.loaded(
+          users: state.users, expandedIds: state.expandedIds, todos: newTodos));
+    } else {
+      emit(UserState.loaded(
+          users: state.users,
+          expandedIds: state.expandedIds,
+          todos: state.todos));
     }
   }
 }

@@ -18,19 +18,26 @@ class TodoCard extends StatelessWidget {
               children: [
                 Checkbox(
                   value: todo.completed,
-                  onChanged: (value) => context
+                  onChanged: (bool? value) => context
                       .read<UserCubit>()
                       .updateTodoCompletion(
                           todo: todo, completed: value ?? false),
                 ),
                 Flexible(child: Text(todo.title!)),
                 SizedBox(
-                  width: 20,
+                  width: 40,
                 )
               ],
             ),
             Positioned.fill(
-              child: Align(alignment: Alignment.centerRight, child: Icon(Icons.delete)),
+              child: Align(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {
+                      context.read<UserCubit>().deleteTodo(todo: todo);
+                    },
+                  )),
             )
           ],
         ),

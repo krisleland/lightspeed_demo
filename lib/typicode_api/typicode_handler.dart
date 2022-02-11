@@ -50,14 +50,23 @@ class TypicodeApiHandler {
 
   Future<bool> updateTodo(
       {required bool completed, required int todoId}) async {
-    await http.patch(Uri.parse(patchTodo + todoId.toString()),
-        body: {'completed': completed}).then((response) {
-          if (response.statusCode == 200) {
-            return true;
-          } else {
-            return false;
-          }
-    });
-    return false;
+    var uri = Uri.parse(patchTodo + todoId.toString());
+    var resp =
+        await http.patch(uri, body: jsonEncode({'completed': completed}));
+    if (resp.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> deleteTodo({required Todo todo}) async {
+    var uri = Uri.parse(patchTodo + todo.id.toString());
+    var resp = await http.delete(uri);
+    if (resp.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
