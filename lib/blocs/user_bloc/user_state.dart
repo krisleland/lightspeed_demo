@@ -6,7 +6,7 @@ part 'user_state.freezed.dart';
 
 @freezed
 class UserState with _$UserState {
-  factory UserState.loaded({required Map<int, User> users, required Set<int> expandedIds, required Map<int, Map<int, Todo>> todos}) = UserStateLoaded;
-  factory UserState.loading({required Map<int, User> users, required Set<int> expandedIds, required Map<int, Map<int, Todo>> todos}) = UserStateLoading;
+  factory UserState.loaded({required Map<int, User> users, required Set<int> expandedIds, required Map<int, Map<int, Todo>> todos, required bool sortById}) = UserStateLoaded;
+  factory UserState.loading({required Map<int, User> users, required Set<int> expandedIds, required Map<int, Map<int, Todo>> todos, required bool sortById}) = UserStateLoading;
 }
 
