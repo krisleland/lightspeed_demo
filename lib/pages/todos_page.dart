@@ -40,25 +40,30 @@ class TodosPage extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                BlocBuilder<UserCubit, UserState>(
-                  builder: (context, state) {
-                    return SizedBox(
-                      width: 100,
-                      child: DropdownButtonFormField<bool>(
-                        decoration: const InputDecoration(labelText: 'Sort By'),
-                        hint: const Text('Sort By'),
-                        onChanged: (bool? val) {
-                          context.read<UserCubit>().changeSort(sortById: val ?? true);
-                        },
-                        value: state.sortById,
-                        items: [true, false].map((e) => DropdownMenuItem<bool>(
-                            value: e, child: Text(e ? 'Id' : 'Title'),
-                        )).toList(),
-                      ),
-                    );
-                  }
+                BlocBuilder<UserCubit, UserState>(builder: (context, state) {
+                  return SizedBox(
+                    width: 100,
+                    child: DropdownButtonFormField<bool>(
+                      decoration: const InputDecoration(labelText: 'Sort By'),
+                      hint: const Text('Sort By'),
+                      onChanged: (bool? val) {
+                        context
+                            .read<UserCubit>()
+                            .changeSort(sortById: val ?? true);
+                      },
+                      value: state.sortById,
+                      items: [true, false]
+                          .map((e) => DropdownMenuItem<bool>(
+                                value: e,
+                                child: Text(e ? 'Id' : 'Title'),
+                              ))
+                          .toList(),
+                    ),
+                  );
+                }),
+                const SizedBox(
+                  height: 16,
                 ),
-                const SizedBox(height: 16,),
                 Expanded(child: LayoutBuilder(builder: (context, constraints) {
                   return BlocBuilder<UserCubit, UserState>(
                       builder: (context, state) {
@@ -90,6 +95,13 @@ class TodosPage extends StatelessWidget {
                     }
                   });
                 })),
+                BlocBuilder<UserCubit, UserState>(builder: (context, state) {
+                  return Text(
+                    '${state.todos[user.id]?.values.where((element) => element.completed!).length ?? 0}/${state.todos[user.id]?.length ?? 0}',
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold),
+                  );
+                })
               ],
             ),
           ),
