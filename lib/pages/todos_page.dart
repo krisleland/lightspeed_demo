@@ -45,7 +45,7 @@ class TodosPage extends StatelessWidget {
                     return SizedBox(
                       width: 100,
                       child: DropdownButtonFormField<bool>(
-                        decoration: InputDecoration(labelText: 'Sort By'),
+                        decoration: const InputDecoration(labelText: 'Sort By'),
                         hint: const Text('Sort By'),
                         onChanged: (bool? val) {
                           context.read<UserCubit>().changeSort(sortById: val ?? true);
